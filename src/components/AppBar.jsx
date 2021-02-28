@@ -4,7 +4,12 @@ import Constants from "expo-constants";
 
 // components
 import Text from "./Text";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { Link } from "react-router-native";
 
 const styles = StyleSheet.create({
@@ -39,8 +44,10 @@ const AppBarTab = ({ text, url }) => {
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <AppBarTab text={"Repositories"} url={"/"} />
-      <AppBarTab text={"SignIn"} url={"/signin"} />
+      <ScrollView horizontal>
+        <AppBarTab text={"Repositories"} url={"/"} />
+        <AppBarTab text={"SignIn"} url={"/signin"} />
+      </ScrollView>
     </View>
   );
 };
