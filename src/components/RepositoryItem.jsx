@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Text from "./Text";
 // id: "jaredpalmer.formik",
 // fullName: "jaredpalmer/formik",
@@ -10,9 +10,15 @@ import Text from "./Text";
 // ratingAverage: 88,
 // reviewCount: 4,
 // ownerAvatarUrl: "
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+  },
+});
+
 export const RepositoryItem = ({ item }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Full name: {item.fullName}</Text>
       <Text>Description: {item.description}</Text>
       <Text>Language: {item.language}</Text>
