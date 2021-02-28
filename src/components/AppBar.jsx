@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: "#24292e",
     flexDirection: "row",
+    borderRadius: 5,
   },
   text: { padding: 25, color: "white" },
 });
