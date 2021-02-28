@@ -6,6 +6,9 @@ import { Text, StyleSheet, View } from "react-native";
 import { RepositoryList } from "./RepositoryList";
 import AppBar from "./AppBar";
 
+// router
+import { Route, Switch, Redirect } from "react-router-native";
+
 const styles = StyleSheet.create({
   container: {
     // marginTop: Constants.statusBarHeight,
@@ -19,8 +22,12 @@ const Main = () => {
   return (
     <View style={styles.container}>
       <AppBar />
-      <RepositoryList />
-      {/* <Text>Rate Repository Application</Text> */}
+      <Switch>
+        <Route path="/" exact>
+          <RepositoryList />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
     </View>
   );
 };
