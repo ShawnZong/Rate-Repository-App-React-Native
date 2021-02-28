@@ -1,7 +1,12 @@
+// config
 import React from "react";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import Constants from "expo-constants";
+
+// components
 import Text from "./Text";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { Link } from "react-router-native";
+
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
@@ -12,15 +17,21 @@ const styles = StyleSheet.create({
   text: { padding: 25, color: "white" },
 });
 
-const AppBarTab = ({ text }) => {
+const AppBarTab = ({ text, url }) => {
   const onPress = () => {
     console.log("hi");
   };
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <Text style={styles.text} fontSize="subheading" fontWeight="bold">
-        {text}
-      </Text>
+      <Link
+        to={`${url}`}
+        component={TouchableWithoutFeedback}
+        activeOpacity={0.8}
+      >
+        <Text style={styles.text} fontSize="subheading" fontWeight="bold">
+          {text}
+        </Text>
+      </Link>
     </TouchableWithoutFeedback>
   );
 };
@@ -28,7 +39,8 @@ const AppBarTab = ({ text }) => {
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <AppBarTab text={"Repositories"} />
+      <AppBarTab text={"Repositories"} url={"/"} />
+      <AppBarTab text={"SignIn"} url={"/signin"} />
     </View>
   );
 };

@@ -5,6 +5,7 @@ import Constants from "expo-constants";
 import { Text, StyleSheet, View } from "react-native";
 import { RepositoryList } from "./RepositoryList";
 import AppBar from "./AppBar";
+import SignIn from "./SignIn";
 
 // router
 import { Route, Switch, Redirect } from "react-router-native";
@@ -25,6 +26,9 @@ const Main = () => {
       <Switch>
         <Route path="/" exact>
           <RepositoryList />
+        </Route>
+        <Route path="/signin" exact>
+          <SignIn />
         </Route>
         <Redirect to="/" />
       </Switch>
