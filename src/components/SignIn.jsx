@@ -2,9 +2,12 @@ import React from "react";
 
 // components
 import Text from "./Text";
-import FormikTextInput from "./FormikTextInput";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+
+// form
 import { Formik } from "formik";
+import FormikTextInput from "./FormikTextInput";
+import * as yup from "yup";
 
 // style
 import theme from "../theme";
@@ -16,16 +19,14 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
   },
-  input: {
-    height: 50,
-    justifyContent: "space-between",
-    borderWidth: 3,
+
+  signInRoundCorner: {
     margin: 10,
-    textAlign: "center",
+    borderRadius: 10,
+    backgroundColor: theme.colors.primary,
   },
   signInButton: {
     textAlign: "center",
-    backgroundColor: theme.colors.primary,
     color: "white",
     padding: 10,
     fontWeight: "bold",
@@ -41,20 +42,16 @@ const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
       <FormikTextInput
-        style={styles.input}
         lable="username"
         name="username"
         placeholder="username"
       />
-      <FormikTextInput
-        style={styles.input}
-        name="pwd"
-        placeholder="password"
-        secureTextEntry
-      />
-      <TouchableWithoutFeedback onPress={onSubmit}>
-        <Text style={styles.signInButton}>Sign In</Text>
-      </TouchableWithoutFeedback>
+      <FormikTextInput name="pwd" placeholder="password" secureTextEntry />
+      <View style={styles.signInRoundCorner}>
+        <TouchableWithoutFeedback onPress={onSubmit}>
+          <Text style={styles.signInButton}>Sign In</Text>
+        </TouchableWithoutFeedback>
+      </View>
     </View>
   );
 };
@@ -63,9 +60,16 @@ const SignIn = () => {
   const onSubmit = (values) => {
     console.log(values);
   };
-
+  const schema = yup.object().shape({
+    username: yup.string().required("Username is required"),
+    pwd: yup.string().required("Password is required"),
+  });
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={schema}
+    >
       {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
     </Formik>
   );
