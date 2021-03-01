@@ -4,7 +4,7 @@ import { FlatList, View, StyleSheet } from "react-native";
 import { RepositoryItem } from "./RepositoryItem";
 
 // style
-import theme from "../theme";
+// import theme from "../theme";
 
 // backend
 import useRepositories from "../hooks/useRepositories";
