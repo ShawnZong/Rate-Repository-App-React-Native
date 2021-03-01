@@ -1,4 +1,6 @@
 import React from "react";
+// local storage
+import AuthStorage from "../utils/authStorage";
 
 // hooks
 import { useSignIn } from "../hooks/useSignIn";
@@ -65,12 +67,15 @@ const SignIn = () => {
   const onSubmit = async (values) => {
     const { username, pwd } = values;
     try {
+      // send mutation to apollo to get token
       const data = await signIn({ username, password: pwd });
-      console.log(data.authorize.accessToken);
+
+      // store token in local storage
+      const loginedUser = new AuthStorage("currentUser");
+      await loginedUser.setAccessToken(data.authorize.accessToken);
     } catch (error) {
       console.log(error);
     }
-    // console.log(values);
   };
   const schema = yup.object().shape({
     username: yup.string().required("Username is required"),
