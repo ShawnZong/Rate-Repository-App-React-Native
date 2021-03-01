@@ -2,7 +2,7 @@ import React from "react";
 import { RepositoryListContainer } from "../components/RepositoryList";
 import { render } from "@testing-library/react-native";
 
-describe.only("RepositoryList", () => {
+describe("RepositoryList", () => {
   describe("RepositoryListContainer", () => {
     it("renders repository information correctly", () => {
       const repositories = {
