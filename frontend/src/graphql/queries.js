@@ -1,5 +1,28 @@
 import { gql } from "apollo-boost";
 
+export const GET_ALL_REVIEWS_IN_ONE_REPOSITORY = gql`
+  query review($id: ID!) {
+    repository(id: $id) {
+      id
+      fullName
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const GET_ONE_REPOSITORY = gql`
   query repository($id: ID!) {
     repository(id: $id) {

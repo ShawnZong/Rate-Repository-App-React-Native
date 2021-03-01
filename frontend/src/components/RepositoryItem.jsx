@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 });
 
 export const RepositoryItem = ({ item }) => {
-  console.log("url", item.url);
+  // console.log("url", item.url);
   return (
     <View style={styles.container}>
       <View style={styles.personTitleDescription}>
