@@ -1,8 +1,8 @@
 import React from "react";
-import Constants from "expo-constants";
+// import Constants from "expo-constants";
 
 // components
-import { Text, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { RepositoryList } from "./RepositoryList";
 import AppBar from "./AppBar";
 import SignIn from "./SignIn";
