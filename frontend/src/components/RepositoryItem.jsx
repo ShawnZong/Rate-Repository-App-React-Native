@@ -1,15 +1,19 @@
 import React from "react";
 // components
-import { View, StyleSheet, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import Text from "./Text";
+
+// router
+import { Link } from "react-router-native";
 
 // style
 import theme from "../theme";
-// const styles = StyleSheet.create({
-//   container: {
-//     backgroundColor: "white",
-//   },
-// });
+
 const styles = StyleSheet.create({
   container: {
     display: "flex",
@@ -59,55 +63,66 @@ const styles = StyleSheet.create({
 
 export const RepositoryItem = ({ item }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.personTitleDescription}>
-        <Image style={styles.profile} source={{ uri: item.ownerAvatarUrl }} />
-        <View style={styles.titleDescription}>
-          <Text testID={item.id} fontWeight="bold" fontSize="subheading">
-            {item.fullName}
-          </Text>
-          <Text testID={item.id} color="textSecondary">
-            {item.description}
-          </Text>
-          <View style={styles.languageBox}>
-            <Text testID={item.id} style={styles.language}>
-              Language: {item.language}
-            </Text>
+    <TouchableWithoutFeedback>
+      <Link
+        to={`/repository/${item.id}`}
+        component={TouchableWithoutFeedback}
+        activeOpacity={0.8}
+      >
+        <View style={styles.container}>
+          <View style={styles.personTitleDescription}>
+            <Image
+              style={styles.profile}
+              source={{ uri: item.ownerAvatarUrl }}
+            />
+            <View style={styles.titleDescription}>
+              <Text testID={item.id} fontWeight="bold" fontSize="subheading">
+                {item.fullName}
+              </Text>
+              <Text testID={item.id} color="textSecondary">
+                {item.description}
+              </Text>
+              <View style={styles.languageBox}>
+                <Text testID={item.id} style={styles.language}>
+                  Language: {item.language}
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.figure}>
+            <View>
+              <Text testID={item.id} fontWeight="bold" fontSize="subheading">
+                {item.stargazersCount >= 1000
+                  ? (item.stargazersCount / 1000).toFixed(1).concat("K")
+                  : item.stargazersCount}
+              </Text>
+              <Text color="textSecondary">Stars</Text>
+            </View>
+            <View>
+              <Text testID={item.id} fontWeight="bold" fontSize="subheading">
+                {item.forksCount >= 1000
+                  ? (item.forksCount / 1000).toFixed(1).concat("K")
+                  : item.forksCount}
+              </Text>
+              <Text color="textSecondary">Forks</Text>
+            </View>
+            <View>
+              <Text testID={item.id} fontWeight="bold" fontSize="subheading">
+                {item.reviewCount >= 1000
+                  ? (item.reviewCount / 1000).toFixed(1).concat("K")
+                  : item.reviewCount}
+              </Text>
+              <Text color="textSecondary">Reviews</Text>
+            </View>
+            <View>
+              <Text testID={item.id} fontWeight="bold" fontSize="subheading">
+                {item.ratingAverage}
+              </Text>
+              <Text color="textSecondary">Rating</Text>
+            </View>
           </View>
         </View>
-      </View>
-      <View style={styles.figure}>
-        <View>
-          <Text testID={item.id} fontWeight="bold" fontSize="subheading">
-            {item.stargazersCount >= 1000
-              ? (item.stargazersCount / 1000).toFixed(1).concat("K")
-              : item.stargazersCount}
-          </Text>
-          <Text color="textSecondary">Stars</Text>
-        </View>
-        <View>
-          <Text testID={item.id} fontWeight="bold" fontSize="subheading">
-            {item.forksCount >= 1000
-              ? (item.forksCount / 1000).toFixed(1).concat("K")
-              : item.forksCount}
-          </Text>
-          <Text color="textSecondary">Forks</Text>
-        </View>
-        <View>
-          <Text testID={item.id} fontWeight="bold" fontSize="subheading">
-            {item.reviewCount >= 1000
-              ? (item.reviewCount / 1000).toFixed(1).concat("K")
-              : item.reviewCount}
-          </Text>
-          <Text color="textSecondary">Reviews</Text>
-        </View>
-        <View>
-          <Text testID={item.id} fontWeight="bold" fontSize="subheading">
-            {item.ratingAverage}
-          </Text>
-          <Text color="textSecondary">Rating</Text>
-        </View>
-      </View>
-    </View>
+      </Link>
+    </TouchableWithoutFeedback>
   );
 };

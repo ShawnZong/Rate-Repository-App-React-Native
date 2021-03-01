@@ -1,5 +1,22 @@
 import { gql } from "apollo-boost";
 
+export const GET_ONE_REPOSITORY = gql`
+  query repository($id: ID!) {
+    repository(id: $id) {
+      id
+      fullName
+      url
+      ownerAvatarUrl
+      description
+      language
+      ratingAverage
+      forksCount
+      reviewCount
+      stargazersCount
+    }
+  }
+`;
+
 export const GET_REPOSITORIES = gql`
   query {
     repositories {
