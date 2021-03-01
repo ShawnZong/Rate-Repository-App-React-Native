@@ -1,8 +1,12 @@
 // config
-import React from "react";
+import React, { useContext } from "react";
+import AuthStorageContext from "../contexts/AuthStorageContext";
 import Constants from "expo-constants";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_AUTHORIZED_USER } from "../graphql/queries";
+
+// apollo
+import { useApolloClient } from "@apollo/react-hooks";
 
 // components
 import Text from "./Text";
@@ -25,11 +29,8 @@ const styles = StyleSheet.create({
 });
 
 const AppBarTab = ({ text, url }) => {
-  const onPress = () => {
-    console.log("hi");
-  };
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <TouchableWithoutFeedback>
       <Link
         to={`${url}`}
         component={TouchableWithoutFeedback}
@@ -44,6 +45,13 @@ const AppBarTab = ({ text, url }) => {
 };
 
 const AppBar = () => {
+  const apolloClient = useApolloClient();
+  const authStorage = useContext(AuthStorageContext);
+
+  const signOut = async () => {
+    await authStorage.removeAccessToken();
+    apolloClient.resetStore();
+  };
   const { data, loading } = useQuery(GET_AUTHORIZED_USER);
   let user;
   if (loading) {
@@ -51,7 +59,6 @@ const AppBar = () => {
   } else {
     user = data.authorizedUser;
   }
-  console.log("user", user);
 
   return (
     <View style={styles.container}>
@@ -59,15 +66,14 @@ const AppBar = () => {
         <AppBarTab text={"Repositories"} url={"/"} />
 
         {user ? (
-          <AppBarTab text={"SignOut"} url={"/"} />
+          <TouchableWithoutFeedback onPress={signOut}>
+            <Text style={styles.text} fontSize="subheading" fontWeight="bold">
+              Sign Out
+            </Text>
+          </TouchableWithoutFeedback>
         ) : (
-          <AppBarTab text={"SignIn"} url={"/signin"} />
+          <AppBarTab text={"Sign In"} url={"/signin"} />
         )}
-        {/* {user ? (
-          <AppBar text={"SignOut"} url={"/"} />
-        ) : (
-          <AppBarTab text={"SignIn"} url={"/signin"} />
-        )} */}
       </ScrollView>
     </View>
   );
