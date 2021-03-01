@@ -1,6 +1,8 @@
 // config
 import React from "react";
 import Constants from "expo-constants";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_AUTHORIZED_USER } from "../graphql/queries";
 
 // components
 import Text from "./Text";
@@ -42,11 +44,30 @@ const AppBarTab = ({ text, url }) => {
 };
 
 const AppBar = () => {
+  const { data, loading } = useQuery(GET_AUTHORIZED_USER);
+  let user;
+  if (loading) {
+    user = null;
+  } else {
+    user = data.authorizedUser;
+  }
+  console.log("user", user);
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarTab text={"Repositories"} url={"/"} />
-        <AppBarTab text={"SignIn"} url={"/signin"} />
+
+        {user ? (
+          <AppBarTab text={"SignOut"} url={"/"} />
+        ) : (
+          <AppBarTab text={"SignIn"} url={"/signin"} />
+        )}
+        {/* {user ? (
+          <AppBar text={"SignOut"} url={"/"} />
+        ) : (
+          <AppBarTab text={"SignIn"} url={"/signin"} />
+        )} */}
       </ScrollView>
     </View>
   );
