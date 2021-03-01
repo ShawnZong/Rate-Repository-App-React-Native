@@ -63,18 +63,22 @@ export const RepositoryItem = ({ item }) => {
       <View style={styles.personTitleDescription}>
         <Image style={styles.profile} source={{ uri: item.ownerAvatarUrl }} />
         <View style={styles.titleDescription}>
-          <Text fontWeight="bold" fontSize="subheading">
+          <Text testID={item.id} fontWeight="bold" fontSize="subheading">
             {item.fullName}
           </Text>
-          <Text color="textSecondary">{item.description}</Text>
+          <Text testID={item.id} color="textSecondary">
+            {item.description}
+          </Text>
           <View style={styles.languageBox}>
-            <Text style={styles.language}>Language: {item.language}</Text>
+            <Text testID={item.id} style={styles.language}>
+              Language: {item.language}
+            </Text>
           </View>
         </View>
       </View>
       <View style={styles.figure}>
         <View>
-          <Text fontWeight="bold" fontSize="subheading">
+          <Text testID={item.id} fontWeight="bold" fontSize="subheading">
             {item.stargazersCount >= 1000
               ? (item.stargazersCount / 1000).toFixed(1).concat("K")
               : item.stargazersCount}
@@ -82,7 +86,7 @@ export const RepositoryItem = ({ item }) => {
           <Text color="textSecondary">Stars</Text>
         </View>
         <View>
-          <Text fontWeight="bold" fontSize="subheading">
+          <Text testID={item.id} fontWeight="bold" fontSize="subheading">
             {item.forksCount >= 1000
               ? (item.forksCount / 1000).toFixed(1).concat("K")
               : item.forksCount}
@@ -90,7 +94,7 @@ export const RepositoryItem = ({ item }) => {
           <Text color="textSecondary">Forks</Text>
         </View>
         <View>
-          <Text fontWeight="bold" fontSize="subheading">
+          <Text testID={item.id} fontWeight="bold" fontSize="subheading">
             {item.reviewCount >= 1000
               ? (item.reviewCount / 1000).toFixed(1).concat("K")
               : item.reviewCount}
@@ -98,7 +102,7 @@ export const RepositoryItem = ({ item }) => {
           <Text color="textSecondary">Reviews</Text>
         </View>
         <View>
-          <Text fontWeight="bold" fontSize="subheading">
+          <Text testID={item.id} fontWeight="bold" fontSize="subheading">
             {item.ratingAverage}
           </Text>
           <Text color="textSecondary">Rating</Text>
