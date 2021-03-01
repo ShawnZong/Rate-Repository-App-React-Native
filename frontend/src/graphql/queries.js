@@ -30,6 +30,7 @@ export const GET_REPOSITORIES = gql`
         cursor
         node {
           id
+          url
           name
           ownerName
           createdAt

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   TouchableWithoutFeedback,
+  Linking,
 } from "react-native";
 import Text from "./Text";
 
@@ -43,15 +44,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     flex: 3,
   },
+  githubBox: {
+    backgroundColor: theme.colors.primary,
+    marginTop: 10,
+    borderRadius: 5,
+    alignItems: "stretch",
+  },
   languageBox: {
     backgroundColor: theme.colors.primary,
     marginTop: 10,
     borderRadius: 5,
     alignSelf: "flex-start",
   },
-  language: {
+  textInBox: {
     color: "white",
     padding: 10,
+    alignSelf: "center",
   },
   figure: {
     paddingTop: 15,
@@ -62,6 +70,7 @@ const styles = StyleSheet.create({
 });
 
 export const RepositoryItem = ({ item }) => {
+  console.log("url", item.url);
   return (
     <View style={styles.container}>
       <View style={styles.personTitleDescription}>
@@ -82,7 +91,7 @@ export const RepositoryItem = ({ item }) => {
             </Text>
 
             <View style={styles.languageBox}>
-              <Text testID={item.id} style={styles.language}>
+              <Text testID={item.id} style={styles.textInBox}>
                 Language: {item.language}
               </Text>
             </View>
@@ -121,6 +130,14 @@ export const RepositoryItem = ({ item }) => {
           <Text color="textSecondary">Rating</Text>
         </View>
       </View>
+
+      {item.url ? (
+        <View style={styles.githubBox}>
+          <TouchableWithoutFeedback onPress={() => Linking.openURL(item.url)}>
+            <Text style={styles.textInBox}>Open in GitHub</Text>
+          </TouchableWithoutFeedback>
+        </View>
+      ) : null}
     </View>
   );
 };

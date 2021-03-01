@@ -15,7 +15,7 @@ import { useParams } from "react-router-native";
 
 export const RepositoryDetail = () => {
   let { id } = useParams();
-  console.log("id", id);
+  //   console.log("id", id);
   const { data, error, loading } = useQuery(GET_ONE_REPOSITORY, {
     fetchPolicy: "cache-and-network",
     variables: {
@@ -28,22 +28,7 @@ export const RepositoryDetail = () => {
   } else {
     repository = data.repository;
   }
-  console.log("data", repository);
-  //   const { repository, fetchMore, reviews, loading } = useOneRepository({
-  //     id,
-  //     first: 3,
-  //   });
-  return (
-    <RepositoryItem item={repository} />
-    // <FlatList
-    //   data={reviews}
-    //   ItemSeparatorComponent={ItemSeparator}
-    //   renderItem={({ item }) => <ReviewItem review={item} />}
-    //   keyExtractor={({ id }) => id}
-    //   ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
-    //   onEndReached={fetchMore}
-    //   onEndReachedThreshold={0.8}
-    //   // ...
-    // />
-  );
+  //   console.log("data", repository);
+
+  return <RepositoryItem item={repository} />;
 };
