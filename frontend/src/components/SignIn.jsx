@@ -1,5 +1,8 @@
 import React from "react";
 
+// hooks
+import { useSignIn } from "../hooks/useSignIn";
+
 // components
 import Text from "./Text";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
@@ -57,8 +60,17 @@ const SignInForm = ({ onSubmit }) => {
 };
 
 const SignIn = () => {
-  const onSubmit = (values) => {
-    console.log(values);
+  const [signIn] = useSignIn();
+
+  const onSubmit = async (values) => {
+    const { username, pwd } = values;
+    try {
+      const data = await signIn({ username, password: pwd });
+      console.log(data.authorize.accessToken);
+    } catch (error) {
+      console.log(error);
+    }
+    // console.log(values);
   };
   const schema = yup.object().shape({
     username: yup.string().required("Username is required"),
